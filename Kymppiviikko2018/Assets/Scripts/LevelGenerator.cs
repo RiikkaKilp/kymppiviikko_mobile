@@ -4,27 +4,53 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour {
 
-    ObjectPooler        objectPooler;
-        
-    GameObject[]        allTiles;
+    List<GameObject>    allTiles = new List<GameObject>();
+    GameObject[]        corners;
 
     public GameObject   leftTile, 
                         rightTile, 
-                        straightTile;
+                        straightTile,
+                        tileSpawn,
+                        tileDestory;
+
     GameObject          currentTile,
                         newTile;
 
-    Vector3             currentPosition,
-                        destroyBox;
+    public int          chunkSize;
+    int                 rnd;
+
+    public Vector3      destroyBox;
+    Vector3             currentPosition;
 
     void Start ()
     {
-        allTiles = new GameObject[] { leftTile, rightTile, straightTile };
-
-        objectPooler = ObjectPooler.Instance;
-
-        currentTile = objectPooler.SpawnFromPool("StraightPiece", transform.position, Quaternion.identity);
-        newTile = objectPooler.SpawnFromPool("StraightPiece", newTile.transform.GetChild(0).position, Quaternion.identity);
-       
+        corners = new GameObject[] { leftTile, rightTile, straightTile };
+        StartChunkSpawner();       
 	}
+
+    void StartChunkSpawner()
+    {
+        currentTile = Instantiate(straightTile, transform.position, transform.rotation);
+        currentTile.transform.parent = gameObject.transform;
+        newTile = Instantiate(straightTile, currentTile.transform.GetChild(0).position, transform.rotation);
+        currentTile.transform.parent = gameObject.transform;
+
+    }
+    void NewChunkOnTrigger()
+    {
+        Debug.Log("New chunk called");
+
+        for(int i = 0; 1< chunkSize - 1; i++)
+        {
+            GameObject newTile = Instantiate(straightTile, currentTile.transform.GetChild(0).position, transform.rotation);
+            newTile.transform.parent = gameObject.transform;
+            currentTile = newTile;
+            allTiles.Add(newTile);
+        }
+
+        rnd = Random.Range(0, 2);
+        newTile = Instantiate(corners[rnd], currentTile.transform.GetChild(0).position, transform.rotation);
+        currentTile = newTile;
+        allTiles.Add(newTile);
+    }
 }

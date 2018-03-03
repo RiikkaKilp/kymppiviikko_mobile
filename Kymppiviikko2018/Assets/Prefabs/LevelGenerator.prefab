@@ -11,22 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1708827755890950}
   m_IsPrefabParent: 1
---- !u!1 &1650709002321586
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4180163094065410}
-  - component: {fileID: 114593277042961648}
-  m_Layer: 0
-  m_Name: Pooler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1708827755890950
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4461757293374502}
+  - component: {fileID: 114689470462909292}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -42,19 +27,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4180163094065410
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1650709002321586}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4461757293374502}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4461757293374502
 Transform:
   m_ObjectHideFlags: 1
@@ -64,29 +36,25 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4180163094065410}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114593277042961648
+--- !u!114 &114689470462909292
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1650709002321586}
+  m_GameObject: {fileID: 1708827755890950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b352355fb5e669d49bd61bd73229bcf8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e4ca6cf5bcaeda4bb4b47261e0cda92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pools:
-  - tag: LeftTile
-    prefab: {fileID: 0}
-    poolSize: 3
-  - tag: RightTile
-    prefab: {fileID: 0}
-    poolSize: 3
-  - tag: StraightTile
-    prefab: {fileID: 0}
-    poolSize: 3
+  leftTile: {fileID: 1851170552257674, guid: 84f3593eda74d8447acb0d26dfeb326a, type: 2}
+  rightTile: {fileID: 1433429882385326, guid: eb1dce8c2ec43cb4aa9df59896f9f118, type: 2}
+  straightTile: {fileID: 1191777107703732, guid: 5d5edaa7bd1072d4fa611f6ce26d523e,
+    type: 2}
+  tileSpawn: {fileID: 0}
+  tileDestory: {fileID: 0}
+  destroyBox: {x: 0, y: 0, z: 0}
