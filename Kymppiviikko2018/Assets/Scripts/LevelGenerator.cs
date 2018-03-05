@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour {
 
-    List<GameObject>    allTiles = new List<GameObject>();
+    public List<GameObject>    allTiles = new List<GameObject>();
     GameObject[]        corners;
 
-    public GameObject   leftTile, 
-                        rightTile, 
-                        straightTile,
-                        tileSpawn,
-                        tileDestory;
+    public GameObject   leftTile,
+                        rightTile,
+                        straightTile;
 
     GameObject          currentTile,
                         newTile;
@@ -19,7 +17,6 @@ public class LevelGenerator : MonoBehaviour {
     public int          chunkSize;
     int                 rnd;
 
-    public Vector3      destroyBox;
     Vector3             currentPosition;
 
     void Start ()
@@ -32,15 +29,17 @@ public class LevelGenerator : MonoBehaviour {
     {
         currentTile = Instantiate(straightTile, transform.position, transform.rotation);
         currentTile.transform.parent = gameObject.transform;
+        allTiles.Add(currentTile);
         newTile = Instantiate(straightTile, currentTile.transform.GetChild(0).position, transform.rotation);
         currentTile.transform.parent = gameObject.transform;
+        allTiles.Add(newTile);
 
     }
-    void NewChunkOnTrigger()
+    public void NewChunkOnTrigger()
     {
         Debug.Log("New chunk called");
 
-        for(int i = 0; 1< chunkSize - 1; i++)
+        for(int i = 0; i < chunkSize - 1; i++)
         {
             GameObject newTile = Instantiate(straightTile, currentTile.transform.GetChild(0).position, transform.rotation);
             newTile.transform.parent = gameObject.transform;
@@ -52,5 +51,15 @@ public class LevelGenerator : MonoBehaviour {
         newTile = Instantiate(corners[rnd], currentTile.transform.GetChild(0).position, transform.rotation);
         currentTile = newTile;
         allTiles.Add(newTile);
+    }
+    public void DestroyChunk()
+    {
+        Debug.Log("Destroy called");
+        for (int i = 0; i < chunkSize; i++)
+        {
+            GameObject toBeDestroyed = allTiles[0];
+            Destroy(toBeDestroyed);
+            allTiles.RemoveAt(0);
+        }
     }
 }
